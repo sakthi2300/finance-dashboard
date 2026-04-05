@@ -1,0 +1,24 @@
+<aside class="sidebar" [class.sidebar--open]="isSidebarOpen" id="sidebar">
+  <div class="sidebar__brand">
+    <img src="assets/logo.png" alt="FinDash Logo" class="sidebar__logo-img" />
+    <div class="sidebar__brand-text-legacy" style="display: none;">
+      <h1 class="sidebar__title">FinDash</h1>
+      <p class="sidebar__tagline">Intelligent Analytics</p>
+    </div>
+  </div>
+
+  <nav class="sidebar__nav">
+    <a routerLink="/dashboard" routerLinkActive="sidebar__link--active" class="sidebar__link" id="nav-dashboard">
+      <i class="fa fa-th-large"></i>
+      <span>Dashboard</span>
+    </a>
+    <a routerLink="/transactions" routerLinkActive="sidebar__link--active" class="sidebar__link" id="nav-transactions">
+      <i class="fa fa-exchange-alt"></i>
+      <span>Transactions</span>
+    </a>
+    <a routerLink="/insights" routerLinkActive="sidebar__link--active" class="sidebar__link" id="nav-insights">
+      <i class="fa fa-chart-pie"></i>
+      <span>Insights</span>
+    </a>
+  </nav>
+</aside>

@@ -1,1 +1,366 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import 'handsontable/dist/handsontable.full.min.css';
+
+/* ============ CSS CUSTOM PROPERTIES ============ */
+:root {
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Light Theme */
+body.light-theme,
+body:not(.dark-theme) {
+  --bg-primary: #f0f2f8;
+  --bg-secondary: #f5f6fa;
+  --card-bg: #ffffff;
+  --card-border: rgba(0, 0, 0, 0.06);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+  --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --sidebar-bg: #ffffff;
+  --sidebar-border: var(--card-border);
+  --sidebar-text: #4b5563;
+  --sidebar-text-hover: #111827;
+  --sidebar-hover-bg: #f3f4f6;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --text-tertiary: #9ca3af;
+  --scrollbar-track: #f1f1f1;
+  --scrollbar-thumb: #c1c1c1;
+}
+
+/* Dark Theme */
+body.dark-theme {
+  --bg-primary: #0f1117;
+  --bg-secondary: #1a1d2e;
+  --card-bg: #1e2235;
+  --card-border: rgba(255, 255, 255, 0.06);
+  --card-shadow: 0 1px 3px rgba(0, 0, 0, 0.2), 0 1px 2px rgba(0, 0, 0, 0.15);
+  --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.3);
+  --sidebar-bg: #0d0f1a;
+  --sidebar-border: transparent;
+  --sidebar-text: rgba(255, 255, 255, 0.6);
+  --sidebar-text-hover: rgba(255, 255, 255, 0.9);
+  --sidebar-hover-bg: rgba(255, 255, 255, 0.08);
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --scrollbar-track: #1a1d2e;
+  --scrollbar-thumb: #374151;
+}
+
+/* ============ GLOBAL RESET ============ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ============ SCROLLBAR ============ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* ============ SELECTION ============ */
+::selection {
+  background: rgba(20, 130, 196, 0.2);
+  color: inherit;
+}
+
+/* ============ LINKS ============ */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============ IMAGES ============ */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ============ BUTTONS ============ */
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ============ SELECT ============ */
+select {
+  font-family: inherit;
+}
+
+select option {
+  background: var(--card-bg);
+  color: var(--text-primary);
+}
+
+/* ============ HANDSONTABLE OVERRIDES ============ */
+.handsontable {
+  font-family: var(--font-family) !important;
+  font-size: 13px !important;
+  color: var(--text-primary) !important;
+}
+
+.handsontable th,
+.handsontable td {
+  border-color: var(--card-border) !important;
+}
+
+.handsontable thead th {
+  background: var(--bg-secondary) !important;
+  color: var(--text-secondary) !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  padding: 10px 12px !important;
+}
+
+.handsontable tbody td {
+  background: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  padding: 10px 12px !important;
+  vertical-align: middle !important;
+}
+
+.handsontable tbody tr:hover td {
+  background: var(--bg-secondary) !important;
+}
+
+.handsontable .htDimmed {
+  color: var(--text-tertiary) !important;
+}
+
+.handsontable th.ht__highlight,
+.handsontable th.activeHeader {
+  background: var(--bg-secondary) !important;
+}
+
+.handsontable td.ht__highlight {
+  background: rgba(20, 130, 196, 0.08) !important;
+}
+
+.handsontable .ht__active_highlight {
+  background: rgba(20, 130, 196, 0.1) !important;
+}
+
+.handsontable .wtBorder {
+  background-color: #1482C4 !important;
+}
+
+.handsontable .currentRow,
+.handsontable .currentRow td {
+  background: rgba(20, 130, 196, 0.04) !important;
+}
+
+/* ============ HANDSONTABLE MENUS & DROPDOWNS ============ */
+.htContextMenu.handsontable,
+.htDropdownMenu.handsontable {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--card-border) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4) !important;
+  font-family: inherit !important;
+  padding: 4px !important;
+}
+
+/* Menu rows and text */
+.htContextMenu.handsontable table tbody tr td,
+.htDropdownMenu.handsontable table tbody tr td {
+  padding: 10px 16px !important;
+  font-size: 13px !important;
+  color: var(--text-secondary) !important;
+  background: var(--card-bg) !important;
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: 1px solid var(--card-border) !important;
+  cursor: pointer !important;
+  transition: all 0.2s;
+}
+
+.htContextMenu.handsontable table tbody tr:last-child td,
+.htDropdownMenu.handsontable table tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* Menu Hover States */
+.htContextMenu.handsontable table tbody tr td:hover,
+.htDropdownMenu.handsontable table tbody tr td:hover,
+.htContextMenu.handsontable table tbody tr td.current,
+.htDropdownMenu.handsontable table tbody tr td.current {
+  background: rgba(20, 130, 196, 0.08) !important;
+  color: #1482C4 !important;
+  font-weight: 500 !important;
+}
+
+/* Filter Dropdown UI Needs specific overrides */
+.htDropdownMenu.handsontable .htUIInput input,
+.htDropdownMenu.handsontable .htUISelect select {
+  background: var(--bg-secondary) !important;
+  border: 1px solid var(--card-border) !important;
+  color: var(--text-primary) !important;
+  border-radius: 6px !important;
+  padding: 8px 12px !important;
+  font-size: 13px !important;
+  outline: none !important;
+  box-shadow: none !important;
+  height: auto !important;
+}
+
+.htDropdownMenu.handsontable .htUIInput input:focus,
+.htDropdownMenu.handsontable .htUISelect select:focus {
+  border-color: #1482C4 !important;
+}
+
+.htDropdownMenu.handsontable .htUIInput input::placeholder {
+  color: var(--text-tertiary) !important;
+}
+
+.htDropdownMenu.handsontable .htUIMultipleSelectSearch {
+  background: transparent !important;
+  border-bottom: 1px solid var(--card-border) !important;
+}
+
+/* Checkbox container in filters */
+.htDropdownMenu.handsontable .htCheckboxRendererLabel {
+  color: var(--text-secondary) !important;
+}
+
+.htDropdownMenu.handsontable .htCheckboxRendererInput {
+  accent-color: #1482C4 !important;
+  cursor: pointer;
+}
+
+/* Select All / Clear Links in Filters */
+.htDropdownMenu.handsontable .htUISelectionControls a {
+  color: #1482C4 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  margin-right: 12px !important;
+}
+
+.htDropdownMenu.handsontable .htUISelectionControls a:hover {
+  text-decoration: underline !important;
+}
+
+/* Ensure the wrapper doesn't have white background */
+.htDropdownMenu.handsontable .htFiltersMenuCondition,
+.htDropdownMenu.handsontable .htFiltersMenuValue {
+  background: var(--card-bg) !important;
+}
+
+/* Column Header Dropdown Buttons in parent table */
+.handsontable .changeType {
+  background: var(--bg-secondary) !important;
+  border-color: var(--card-border) !important;
+}
+
+/* Row headers */
+.handsontable .ht_clone_left th {
+  background: var(--bg-secondary) !important;
+  color: var(--text-tertiary) !important;
+  font-size: 11px !important;
+}
+
+/* ============ HIGHCHARTS DARK MODE ============ */
+.dark-theme .highcharts-background {
+  fill: transparent !important;
+}
+
+/* ============ GLOBAL ANIMATIONS ============ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ============ UTILITY CLASSES ============ */
+.text-primary {
+  color: var(--text-primary);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+.text-success {
+  color: #10b981;
+}
+
+.text-danger {
+  color: #ef4444;
+}
+
+.text-warning {
+  color: #f59e0b;
+}
+
+.text-info {
+  color: #1482C4;
+}
+
+.font-weight-bold {
+  font-weight: 600 !important;
+}
